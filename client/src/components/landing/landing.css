@@ -1,7 +1,32 @@
 .navbar_container {
   padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: large;
+  font-weight: 300;
+}
+.navbar_logo_container {
+  display: flex;
+  align-items: end;
+  gap: 1rem;
 }
 .main_logo {
   width: 3rem;
   height: 3rem;
+}
+.navbar_links {
+  display: flex;
+  gap: 2rem;
+}
+.link {
+  font-size: large;
+  font-weight: 300;
+  background-color: rgba(75, 86, 96, 0.585);
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.typed_text {
+  font-size: 3rem;
 }

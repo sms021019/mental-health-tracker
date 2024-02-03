@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NavBar from "./components/landing/AppBar";
 import Landing from "./components/landing/Landing";
 import React from "react";
+import Login from "./components/login/Login";
+import Register from "./components/register/Register";
 
 function App() {
   return (
@@ -12,7 +14,8 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Landing />} />
-          {/* <Route path="/experience" element={<ExperiencePage />} /> */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
     </div>
