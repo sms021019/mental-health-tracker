@@ -2,10 +2,9 @@
   --main-bg-color: #313339;
   --main-text-color: #ffffff;
 }
-.App {
+body {
   width: 100vw;
   height: 100vh;
   background-color: var(--main-bg-color);
-  text-align: center;
   color: var(--main-text-color);
 }
