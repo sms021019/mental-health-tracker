@@ -7,6 +7,7 @@ import Landing from "./components/landing/Landing";
 import React from "react";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
+import PersonalInfo from "./components/personalInfo/personalInfo";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/dailyQuestions" element={<DailyQuestions />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/personalInfo" element={<PersonalInfo />} />
         </Routes>
       </Router>
     </div>
