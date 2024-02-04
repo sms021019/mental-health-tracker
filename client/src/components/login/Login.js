@@ -69,7 +69,7 @@ const Login = () => {
             navigate("/register");
           }}
         >
-          Already a member?
+          Don’t have an account?
         </div>
         <div className="btn">
           <button className="login_btn">

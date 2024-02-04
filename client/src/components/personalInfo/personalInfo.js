@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import {updateUserAPIMethod} from "../../api/client"
 
 import './personalInfo.css';
 
@@ -84,10 +85,23 @@ function PersonalInfo() {
     }));
   };
 
-  const handleSubmit = (e) => {
-    // e.preventDefault();
-    console.log(formData);
-    // Here you would typically send the formData to your server via an API call
+  const handleSubmit = async (event) => {
+    console.log("Submitting form:", formData);
+    try {
+      const response = await fetch("YOUR_API_ENDPOINT", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      console.log("Submission successful", data);
+      // Handle success (e.g., navigate to a different page or show a success message)
+    } catch (error) {
+      console.error("Submission failed", error);
+      // Handle error (e.g., show an error message)
+    }
   };
 
   const isFormComplete = Object.values(formData).every(value => value !== '');
@@ -133,7 +147,7 @@ function PersonalInfo() {
           <AgeInput value={formData.averageSleepingHours} onChange={(newValue) => handleAgeChange(newValue, 'averageSleepingHours')} />
         </div>
         <div className='submit_container' onClick={() => isFormComplete ? handleSubmit() : void 0}>
-          <Button text={"Submit"} to={"/"} isFormComplete={isFormComplete}/>
+          <Button text={"Submit"} to={"/dashboard"} isFormComplete={isFormComplete}/>
         </div>
       </form>
     </div>

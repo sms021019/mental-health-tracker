@@ -32,6 +32,17 @@ export const updateUserAPIMethod = (user) => {
     }).then(checkStatus);
 }
 
+export const submitQuestionFormResponses = (formResponses) => {
+    return fetch(`http://localhost:3001/api/questionFormResponses`, {
+        ...defaultHeaders,
+        method: 'POST', 
+        body: JSON.stringify(formResponses), 
+    })
+    .then(checkStatus)
+    .then(parseJSON); 
+};
+
+
 
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
