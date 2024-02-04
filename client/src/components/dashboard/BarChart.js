@@ -1,79 +1,79 @@
 // GoogleBarChart.js
 
-import React, { useEffect, useState } from 'react';
-import { Chart } from 'react-google-charts';
+import React, { useEffect, useState } from "react";
+import { Chart } from "react-google-charts";
 
 const BarChart = ({ userData }) => {
-    // Data for the chart
-    const emotion = "depressed";
-    if (userData) {
-        console.log("USERDATA BARCHART: ", userData);
-    }
+  // Data for the chart
+  const emotion = "depressed";
+  if (userData) {
+    console.log("USERDATA BARCHART: ", userData);
+  }
 
-    // const dateArray = userData.map(obj => obj.datetime);
-    // const stress_point_array = userData.map(obj => Math.round(obj.stress_point * 100));
+  // const dateArray = userData.map(obj => obj.datetime);
+  // const stress_point_array = userData.map(obj => Math.round(obj.stress_point * 100));
 
-    // const finalArray = [['Percentage', 'Mental State Intensity']];
-    // const combinedArray = dateArray.map((date, index) => [date, stress_point_array[index]]);
-    // finalArray.push(combinedArray);
-    // console.log("FINAL ARRAY: ", finalArray);
+  // const finalArray = [['Percentage', 'Mental State Intensity']];
+  // const combinedArray = dateArray.map((date, index) => [date, stress_point_array[index]]);
+  // finalArray.push(combinedArray);
+  // console.log("FINAL ARRAY: ", finalArray);
 
-    const finalArray = [
-        ['Percentage', 'Emotion'],
-        ...userData.map(obj => [obj.datetime.split('T')[0] + " \n(Depressed)", obj.stress_point * 100]),
-    ];
+  const finalArray = [
+    ["Percentage", "Emotion"],
+    ...userData.map((obj) => [
+      obj.datetime.split("T")[0] + " \n(Depressed)",
+      obj.stress_point * 100,
+    ]),
+  ];
 
-    const [data, setData] = useState(finalArray);
+  const [data, setData] = useState(finalArray);
 
-    // Options for the chart
-    const options = {
-        title: 'Your Depression Level Log',
-        chartArea: { width: '50%' },
-        hAxis: {
-            title: 'Date',
-            minValue: 0,
-            titleTextStyle: { color: 'white' }, // Change the color to your preferred color
-            textStyle: { color: 'white' }
-        },
-        vAxis: {
-            title: 'Percentage',
-            titleTextStyle: { color: 'white' }, // Change the color to your preferred color
-            textStyle: { color: 'white' },
-            viewWindow: {
-                max: 100 // Set your desired maximum value here
-            }
-        },
-        backgroundColor: '#41434a',
-        titleTextStyle: { color: 'white' }, // Change the color to your preferred color
-        series: {
-            0: { color: '#487575' }, // Change the color to your preferred color
-        },
-        legend: {
-            textStyle: { color: 'white' }, // Change the color to your preferred color
-        },
-        animation: {
-            startup: true,  // Enable animation on load
-            duration: 1000, // Animation duration in milliseconds
-            easing: 'out',  // Easing function for animation
-        },
-    };
+  // Options for the chart
+  const options = {
+    title: "Your Depression Level Log",
+    chartArea: { width: "50%" },
+    hAxis: {
+      title: "Date",
+      minValue: 0,
+      titleTextStyle: { color: "white" }, // Change the color to your preferred color
+      textStyle: { color: "white" },
+    },
+    vAxis: {
+      title: "Percentage",
+      titleTextStyle: { color: "white" }, // Change the color to your preferred color
+      textStyle: { color: "white" },
+      viewWindow: {
+        max: 100, // Set your desired maximum value here
+      },
+    },
+    backgroundColor: "#41434a",
+    titleTextStyle: { color: "white" }, // Change the color to your preferred color
+    series: {
+      0: { color: "#a7caed" }, // Change the color to your preferred color
+    },
+    legend: {
+      textStyle: { color: "white" }, // Change the color to your preferred color
+    },
+    animation: {
+      startup: true, // Enable animation on load
+      duration: 1000, // Animation duration in milliseconds
+      easing: "out", // Easing function for animation
+    },
+  };
 
-    return (
-        <Chart
-            width={'700px'}
-            height={'300px'}
-            chartType="ColumnChart"
-            loader={<div>Loading Chart</div>}
-            data={data}
-            options={options}
-        />
-    );
+  return (
+    <Chart
+      width={"700px"}
+      height={"300px"}
+      chartType="ColumnChart"
+      loader={<div>Loading Chart</div>}
+      data={data}
+      options={options}
+    />
+  );
 };
 
 export default BarChart;
-
-
-
 
 // // BarChart.js
 
@@ -115,7 +115,6 @@ export default BarChart;
 
 //         return null;
 //     };
-
 
 //     return (
 //         <BarChart width={800} height={400} data={data}>
