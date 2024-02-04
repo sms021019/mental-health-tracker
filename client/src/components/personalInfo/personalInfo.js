@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import {updateUserAPIMethod, getUserById} from "../../api/client"
+import { updateUserAPIMethod, getUserById } from "../../api/client"
 import { selectUser } from '../../features/userSlice';
 import { useSelector } from "react-redux";
 
@@ -76,8 +76,8 @@ function PersonalInfo() {
   console.log("VAL: ", valueFromLocalStorage);
 
   const navigate = useNavigate();
-  const user = getUserById(valueFromLocalStorage);
-  console.log("USER: ", user);
+  // const user = getUserById(valueFromLocalStorage);
+  // console.log("USER: ", user);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -94,41 +94,41 @@ function PersonalInfo() {
     }));
   };
 
-//   const handleSubmit = async (event) => {
-//     // event.preventDefault(); // Prevents the default form submission behavior
-//     console.log("Submitting form:", formData);
-//     try {
-//         const res = await updateUserAPIMethod(valueFromLocalStorage);
-//         if(res.ok) {
-//             const jsonResult = await res.json();
-//             console.log(jsonResult);
-//             navigate("/dashboard");
-//         }
-//     } catch(error) {
-//         console.error("Error updating user:", error);
-//         // Handle the error appropriately here
-//     }
-// };
+  //   const handleSubmit = async (event) => {
+  //     // event.preventDefault(); // Prevents the default form submission behavior
+  //     console.log("Submitting form:", formData);
+  //     try {
+  //         const res = await updateUserAPIMethod(valueFromLocalStorage);
+  //         if(res.ok) {
+  //             const jsonResult = await res.json();
+  //             console.log(jsonResult);
+  //             navigate("/dashboard");
+  //         }
+  //     } catch(error) {
+  //         console.error("Error updating user:", error);
+  //         // Handle the error appropriately here
+  //     }
+  // };
 
-const handleSubmit = async (event) => {
-  // event.preventDefault(); // Prevents the default form submission behavior
-  console.log("Submitting form:", formData);
-  try {
+  const handleSubmit = async (event) => {
+    // event.preventDefault(); // Prevents the default form submission behavior
+    console.log("Submitting form:", formData);
+    try {
       // Use formData instead of user for the update
       const res = await updateUserAPIMethod(valueFromLocalStorage, formData);
-      if(res.ok) {
-          const jsonResult = await res.json();
-          console.log(jsonResult);
-          navigate("/dashboard"); // Navigate on successful update
+      if (res.ok) {
+        const jsonResult = await res.json();
+        console.log(jsonResult);
+        navigate("/dashboard"); // Navigate on successful update
       } else {
-          // Handle non-ok responses here, if needed
-          console.error("Failed to update user");
+        // Handle non-ok responses here, if needed
+        console.error("Failed to update user");
       }
-  } catch(error) {
+    } catch (error) {
       console.error("Error updating user:", error);
       // Handle the error appropriately here
-  }
-};
+    }
+  };
 
 
   const isFormComplete = Object.values(formData).every(value => value !== '');
@@ -175,7 +175,7 @@ const handleSubmit = async (event) => {
         </div>
         <div className='submit_container' onClick={() => isFormComplete ? handleSubmit() : void 0}>
 
-          <Button text={"Submit"} to={"/dashboard"} isFormComplete={isFormComplete}/>
+          <Button text={"Submit"} to={"/dashboard"} isFormComplete={isFormComplete} />
         </div>
       </form>
     </div>

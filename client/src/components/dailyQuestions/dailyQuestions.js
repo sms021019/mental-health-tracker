@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, LinearProgress, Typography } from "@mui/material";
-import {updateUserAPIMethod} from "../../api/client"
+import { updateUserAPIMethod } from "../../api/client"
 import { useNavigate } from "react-router-dom";
 
 import "../../App.css";
@@ -91,23 +91,32 @@ const DailyQuestions = () => {
 
   const handleSubmit = async (event) => {
     console.log("Submitting answers:", answers);
+    const newObject = {
+      datetime: "",
+      questions_index: [],
+      answers: answers,
+      answer_prob: [],
+      stress_point: 0
+    }
+    const arr = ['1', '2'];
+    const uData = { userData: arr };
     try {
-        // Use formData instead of user for the update
-        const res = await updateUserAPIMethod( valueFromLocalStorage, answers );
-        if(res.ok) {
-            const jsonResult = await res.json();
-            console.log(jsonResult);
-            navigate("/dashboard"); // Navigate on successful update
-        } else {
-            // Handle non-ok responses here, if needed
-            console.error("Failed to submit answers");
-        }
-    } catch(error) {
-        console.error("Error submitting user:", error);
-        // Handle the error appropriately here
+      // Use formData instead of user for the update
+      const res = await updateUserAPIMethod(valueFromLocalStorage, uData);
+      if (res.ok) {
+        const jsonResult = await res.json();
+        console.log(jsonResult);
+        navigate("/dashboard"); // Navigate on successful update
+      } else {
+        // Handle non-ok responses here, if needed
+        console.error("Failed to submit answers");
+      }
+    } catch (error) {
+      console.error("Error submitting user:", error);
+      // Handle the error appropriately here
     }
   };
-  
+
 
   const handleNext = () => {
     setCurrentQuestionIndex((prevIndex) =>
