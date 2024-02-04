@@ -65,7 +65,8 @@ const getUser = async (req, res) => {
 const updateUser = async (req, res) => {
     // Logic to update a user goes here
     const userId = req.params.id;
-    const { username, email, password } = req.body;
+    const { firstname, lastname, email, pwd, gender, age, marriageStatus, ethnicity, occupation, pronoun } = req.body;
+
     console.log("UPDATING USER: ", userId);
 
     try {
@@ -77,9 +78,16 @@ const updateUser = async (req, res) => {
         }
 
         // Update user properties
-        userToUpdate.username = username || userToUpdate.username;
+        userToUpdate.firstname = firstname || userToUpdate.firstname;
+        userToUpdate.lastname = lastname || userToUpdate.lastname;
         userToUpdate.email = email || userToUpdate.email;
-        userToUpdate.password = password || userToUpdate.password;
+        userToUpdate.pwd = pwd || userToUpdate.pwd;
+        userToUpdate.gender = gender || userToUpdate.gender;
+        userToUpdate.age = age || userToUpdate.age;
+        userToUpdate.marriageStatus = marriageStatus || userToUpdate.marriageStatus;
+        userToUpdate.ethnicity = ethnicity || userToUpdate.ethnicity;
+        userToUpdate.occupation = occupation || userToUpdate.occupation;
+        userToUpdate.pronoun = pronoun || userToUpdate.pronoun;
 
         // Save the updated user to the database
         const updatedUser = await userToUpdate.save();
