@@ -91,6 +91,7 @@
   font-weight: 200;
   text-decoration: underline;
   cursor: pointer;
+  align-self: flex-end;
 }
 .login_register_link:hover {
   color: #d3d3d3;

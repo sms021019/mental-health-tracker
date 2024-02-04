@@ -1,18 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import "./register.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const handleLogin = (e) => {
-    console.log("Register");
+  const navigate = useNavigate();
+  const [registerData, setRegisterData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  const [confirmPwd, setConfirmPwd] = useState("");
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setRegisterData((prevData) => ({ ...prevData, [name]: value }));
+  };
+  const handleRegister = (e) => {
+    if (registerData.password !== confirmPwd) {
+      alert("Passwords do not match");
+      return;
+    }
+    console.log(registerData, confirmPwd);
     e.preventDefault();
   };
   return (
     <div className="register_container">
-      <form onSubmit={handleLogin} className="register_form">
+      <form onSubmit={handleRegister} className="register_form">
         <div className="register_title">Create An Account</div>
         <div className="register_subtitle">
           Your just one click away from a happier, healthier you.
           <br /> Take the first step today.
+        </div>
+        <div className="field">
+          <i className="input-icon bi bi-alphabet-uppercase" />
+          <input
+            autoComplete="off"
+            placeholder="First Name"
+            className="input-field"
+            type="text"
+            onChange={handleInputChange}
+            name="firstName"
+          />
+        </div>
+        <div className="field">
+          <i className="input-icon bi bi-alphabet-uppercase" />
+          <input
+            autoComplete="off"
+            placeholder="Last Name"
+            className="input-field"
+            type="text"
+            onChange={handleInputChange}
+            name="lastName"
+          />
         </div>
         <div className="field">
           <svg
@@ -27,9 +67,11 @@ const Register = () => {
           </svg>
           <input
             autoComplete="off"
-            placeholder="Username"
+            placeholder="Email"
             className="input-field"
             type="text"
+            onChange={handleInputChange}
+            name="email"
           />
         </div>
         <div className="field">
@@ -47,12 +89,41 @@ const Register = () => {
             placeholder="Password"
             className="input-field"
             type="password"
+            onChange={handleInputChange}
+            name="password"
           />
         </div>
-        <div className="login_register_link"> Already a member?</div>
+        <div className="field">
+          <svg
+            className="input-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
+          </svg>
+          <input
+            placeholder="Confirm Password"
+            className="input-field"
+            type="password"
+            onChange={(e) => setConfirmPwd(e.target.value)}
+          />
+        </div>
+
+        <div
+          className="register_login_link"
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          Already Have an Account?
+        </div>
         <div className="btn">
-          <button className="login_btn">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button className="register_btn">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sign
+            Up&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </button>
         </div>
       </form>
