@@ -51,6 +51,7 @@ const Landing = () => {
           <Features />
         </div>
       </div>
+      <br />
       <div className="contact_form_wrapper">
         <ContactForm />
       </div>

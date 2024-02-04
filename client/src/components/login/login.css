@@ -48,6 +48,14 @@
   fill: white;
 }
 
+/* .input-field {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  color: #d3d3d3;
+  font-size: 1rem;
+} */
 .input-field {
   background: none;
   border: none;
@@ -55,6 +63,8 @@
   width: 100%;
   color: #d3d3d3;
   font-size: 1rem;
+  /* Add the following line to explicitly set border to none */
+  border: none;
 }
 
 .form .btn {

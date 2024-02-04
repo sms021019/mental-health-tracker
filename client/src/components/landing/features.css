@@ -28,13 +28,12 @@
   /* margin-top: 1rem; */
   text-align: center;
   width: 100%;
-  /* background-color: azure; */
+  height: 6rem;
 }
 
 /* Buttons */
 
 .slideshowDots {
-  margin-top: 0.5rem;
   text-align: center;
 }
 
