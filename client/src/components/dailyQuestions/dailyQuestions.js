@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import { 
-  Button, 
+import React, { 
+  useState,
+  useEffect 
+} from 'react';
+import {  
   Box, 
-  TextField,
   LinearProgress,
   Typography,
 } from '@mui/material';
 
 import '../../App.css';
+import "./dailyQuestions.css";
 
 function LinearProgressWithLabel(props) {
   return (
@@ -24,13 +26,62 @@ function LinearProgressWithLabel(props) {
   );
 }
 
+const Button = ({ text, onClick, disabled }) => {
+  const handleClick = (e) => {
+    if (disabled) {
+      e.preventDefault();
+      return; 
+    }
+    onClick(); 
+  };
+
+  const btnStyle = disabled ? { pointerEvents: 'none', opacity: 0.5 } : {};
+
+  return (
+    <div className="btn_container" onClick={handleClick} style={btnStyle}>
+      {text}
+    </div>
+  );
+};
+
+function shuffleArray(array) {
+  let currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (currentIndex !== 0) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+const selectRandomQuestions = () => shuffleArray([...allQuestions]).slice(0, 5);
+
+const allQuestions = [
+  "Question 1", "Question 2", "Question 3",  "Question 4",  "Question 5" ,
+   "Question 6" , "Question 7" , "Question 8" , "Question 9" , "Question 10"
+];
+
 const DailyQuestions = () => {
-  const [questions, setQuestions] = useState(["1","2","3","4","5"]);  // TODO : Get questions from back
+  const [questions, setQuestions] = useState(selectRandomQuestions);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({});
 
+
   const totalQuestions = questions.length;
   const progress = (currentQuestionIndex / (totalQuestions - 1)) * 100;
+
+  useEffect(() => {
+    setQuestions(selectRandomQuestions());
+  }, []);
 
   const handleAnswerChange = (event) => {
     const newAnswers = {
@@ -40,10 +91,26 @@ const DailyQuestions = () => {
     setAnswers(newAnswers);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('Submitting questions:', questions);
-    // Functionality to send the questions to a server or API
+
+  const handleSubmit = async (event) => {
+    // event.preventDefault(); // This is crucial to prevent form from actually submitting and reloading the page.
+    console.log('Submitting answers:', answers);
+    try {
+      // Example: Send answers to your server
+      const response = await fetch('YOUR_API_ENDPOINT', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(answers),
+      });
+      const data = await response.json();
+      console.log('Submission successful', data);
+      // Handle success (e.g., navigate to a different page or show a success message)
+    } catch (error) {
+      console.error('Submission failed', error);
+      // Handle error (e.g., show an error message)
+    }
   };
 
   const handleNext = () => {
@@ -74,31 +141,23 @@ const DailyQuestions = () => {
         </Box>
         <h2 style={{ textAlign: 'center' }}>{questions[currentQuestionIndex]}</h2>
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-          <TextField
-            fullWidth
-            label="Your Answer"
-            variant="outlined"
-            multiline
-            rows={8} 
-            value={answers[currentQuestionIndex] || ''}
-            onChange={handleAnswerChange}
-            sx={{ mb: 2, backgroundColor: 'white'}} 
-          />
+        <textarea
+          placeholder="Your Answer"
+          className="input" // Use className instead of class for JSX
+          name="text"
+          onChange={handleAnswerChange} 
+          value={answers[currentQuestionIndex] || ''}
+        />
+        </form>
+          
           <Box sx={{ display: 'flex', justifyContent: 'space-between', paddingTop: 2 }}>
-            <Button variant="contained" onClick={handlePrev} disabled={currentQuestionIndex === 0}>
-              Previous
-            </Button>
+            <Button text={"Previous"} onClick={handlePrev} disabled={currentQuestionIndex === 0}/>
             {isLastQuestion ? (
-              <Button type="submit" variant="contained" disabled={isAnswerEmpty}>
-                Submit
-              </Button>
+              <Button text={"Submit"} onClick={handleSubmit} disabled={isAnswerEmpty}/>
             ) : (
-              <Button onClick={handleNext} variant="contained" disabled={isAnswerEmpty}>
-                Next
-              </Button>
+              <Button text={"Next"} onClick={handleNext} disabled={isAnswerEmpty}/>
             )}
           </Box>
-        </form>
       </Box>
     </Box>
   );

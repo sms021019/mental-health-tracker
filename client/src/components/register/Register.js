@@ -1,18 +1,18 @@
 import React from "react";
-import "./login.css";
+import "./register.css";
 
-const Login = () => {
+const Register = () => {
   const handleLogin = (e) => {
-    console.log("Login");
+    console.log("Register");
     e.preventDefault();
   };
   return (
-    <div className="login_container">
-      <form onSubmit={handleLogin} className="login_form">
-        <div className="login_title">Login</div>
-        <div className="login_subtitle">
-          Start your journey to a happier, healthier you. Take the first step
-          today.
+    <div className="register_container">
+      <form onSubmit={handleLogin} className="register_form">
+        <div className="register_title">Create An Account</div>
+        <div className="register_subtitle">
+          Your just one click away from a happier, healthier you.
+          <br /> Take the first step today.
         </div>
         <div className="field">
           <svg
@@ -60,4 +60,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
