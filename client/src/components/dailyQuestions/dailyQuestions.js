@@ -13,14 +13,8 @@ function LinearProgressWithLabel(props) {
       </Box>
       <Box sx={{ minWidth: 35 }}>
         <Typography variant="body2" color="white">{`${Math.round(
-<<<<<<< HEAD
-          props.value,
-        )}%`}
-        </Typography>
-=======
           props.value
         )}%`}</Typography>
->>>>>>> ya
       </Box>
     </Box>
   );
@@ -50,15 +44,8 @@ function shuffleArray(array) {
     randomIndex;
 
   while (currentIndex !== 0) {
-<<<<<<< HEAD
-
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
-
-=======
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
->>>>>>> ya
     temporaryValue = array[currentIndex];
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
@@ -98,19 +85,12 @@ const DailyQuestions = () => {
   };
 
   const handleSubmit = async (event) => {
-<<<<<<< HEAD
-    console.log('Submitting answers:', answers);
-    try {
-      const response = await fetch('YOUR_API_ENDPOINT', {
-        method: 'POST',
-=======
     // event.preventDefault(); // This is crucial to prevent form from actually submitting and reloading the page.
     console.log("Submitting answers:", answers);
     try {
       // Example: Send answers to your server
       const response = await fetch("YOUR_API_ENDPOINT", {
         method: "POST",
->>>>>>> ya
         headers: {
           "Content-Type": "application/json",
         },
@@ -152,17 +132,6 @@ const DailyQuestions = () => {
         <Box sx={{ width: "100%" }}>
           <LinearProgressWithLabel value={progress} />
         </Box>
-<<<<<<< HEAD
-        <h2 style={{ textAlign: 'center' }}>{questions[currentQuestionIndex]}</h2>
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-        <textarea
-          placeholder="Your Answer"
-          className="input" 
-          name="text"
-          onChange={handleAnswerChange} 
-          value={answers[currentQuestionIndex] || ''}
-        />
-=======
         <h2 style={{ textAlign: "center" }}>
           {questions[currentQuestionIndex][1]}
         </h2>
@@ -177,7 +146,6 @@ const DailyQuestions = () => {
             onChange={handleAnswerChange}
             value={answers[currentQuestionIndex] || ""}
           />
->>>>>>> ya
         </form>
 
         <Box
