@@ -4,6 +4,8 @@ import { Box, LinearProgress, Typography } from "@mui/material";
 import "../../App.css";
 import "./dailyQuestions.css";
 import questionSet from "./questionSet.json";
+import Lottie from "lottie-react";
+import FacialExpression from "../../assets/lottie/FacialExpression.json";
 
 function LinearProgressWithLabel(props) {
   return (
@@ -115,15 +117,20 @@ const DailyQuestions = () => {
   const isAnswerEmpty = !answers[currentQuestionIndex];
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        height: "100vh",
-        bgcolor: "var(--main-bg-color)",
-      }}
-    >
+    <>
+      <Lottie
+        style={{ width: "20rem", height: "20rem" }}
+        animationData={FacialExpression}
+      />
+      {/* <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          height: "100vh",
+          bgcolor: "var(--main-bg-color)",
+        }}
+      > */}
       <Box sx={{ p: 2, width: "100%", maxWidth: "600px", mx: "auto" }}>
         <Box sx={{ width: "100%" }}>
           <LinearProgressWithLabel value={progress} />
@@ -171,7 +178,8 @@ const DailyQuestions = () => {
           )}
         </Box>
       </Box>
-    </Box>
+      {/* </Box> */}
+    </>
   );
 };
 
