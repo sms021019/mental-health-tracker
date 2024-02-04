@@ -1,6 +1,7 @@
 .navbar_container {
   padding: 1rem 2rem;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   font-size: large;
@@ -26,7 +27,54 @@
   padding: 0.5rem 1rem 0.5rem 1rem;
   border-radius: 0.5rem;
 }
-
+.landing_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 .typed_text {
   font-size: 3rem;
+}
+
+.loader {
+  position: relative;
+  overflow: hidden;
+  border-right: 3px solid;
+  width: 0px;
+  animation: typewriter 2s steps(10) infinite alternate,
+    blink 0.5s steps(10) infinite;
+}
+
+.loader-text {
+  font-size: 40px;
+  font-weight: 700;
+  background: linear-gradient(to right, #4c6c8c, #156f99);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes typewriter {
+  0% {
+    width: 0px;
+  }
+
+  100% {
+    width: 240px;
+  }
+}
+
+@keyframes blink {
+  0% {
+    border-right-color: rgba(255, 255, 255, 0.75);
+  }
+
+  100% {
+    border-right-color: transparent;
+  }
+}
+.contact_form_wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
 }

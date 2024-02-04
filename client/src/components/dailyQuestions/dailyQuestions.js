@@ -20,7 +20,8 @@ function LinearProgressWithLabel(props) {
       <Box sx={{ minWidth: 35 }}>
         <Typography variant="body2" color="white">{`${Math.round(
           props.value,
-        )}%`}</Typography>
+        )}%`}
+        </Typography>
       </Box>
     </Box>
   );
@@ -47,14 +48,11 @@ const Button = ({ text, onClick, disabled }) => {
 function shuffleArray(array) {
   let currentIndex = array.length, temporaryValue, randomIndex;
 
-  // While there remain elements to shuffle...
   while (currentIndex !== 0) {
 
-    // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
 
-    // And swap it with the current element.
     temporaryValue = array[currentIndex];
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
@@ -93,10 +91,8 @@ const DailyQuestions = () => {
 
 
   const handleSubmit = async (event) => {
-    // event.preventDefault(); // This is crucial to prevent form from actually submitting and reloading the page.
     console.log('Submitting answers:', answers);
     try {
-      // Example: Send answers to your server
       const response = await fetch('YOUR_API_ENDPOINT', {
         method: 'POST',
         headers: {
@@ -143,7 +139,7 @@ const DailyQuestions = () => {
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         <textarea
           placeholder="Your Answer"
-          className="input" // Use className instead of class for JSX
+          className="input" 
           name="text"
           onChange={handleAnswerChange} 
           value={answers[currentQuestionIndex] || ''}

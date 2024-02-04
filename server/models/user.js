@@ -1,28 +1,28 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-    //   _id: mongoose.Schema.Types.ObjectId,
-    firstname: String,
-    lastname: String,
-    email: String,
-    gender: String,
-    age: Number,
-    marriageStatus: String,
-    ethnicity: String,
-    occupation: String,
-    pronoun: String,
-    pwd: String,
-    userData: [
-        {
-            datetime: Date,
-            questions_index: [Number],
-            answer_prob: [Number],
-            stress_point: Number
-        }
-    ]
+  firstname: String,
+  lastname: String,
+  email: String,
+  gender: String,
+  age: Number,
+  marriageStatus: String,
+  ethnicity: String,
+  occupation: String,
+  pronoun: String,
+  pwd: String,
+  userData: [
+    {
+      datetime: Date,
+      questions_index: [Number],
+      answer_prob: [Number],
+      stress_point: Number,
+      condition: String,
+    },
+  ],
 });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model("User", UserSchema);
 
 // const mongoose = require("mongoose");
 
