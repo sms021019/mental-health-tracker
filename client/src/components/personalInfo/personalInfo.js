@@ -94,21 +94,42 @@ function PersonalInfo() {
     }));
   };
 
-  const handleSubmit = async (event) => {
-    // event.preventDefault(); // Prevents the default form submission behavior
-    console.log("Submitting form:", formData);
-    try {
-        const res = await updateUserAPIMethod(valueFromLocalStorage);
-        if(res.ok) {
-            const jsonResult = await res.json();
-            console.log(jsonResult);
-            navigate("/dashboard");
-        }
-    } catch(error) {
-        console.error("Error updating user:", error);
-        // Handle the error appropriately here
-    }
+//   const handleSubmit = async (event) => {
+//     // event.preventDefault(); // Prevents the default form submission behavior
+//     console.log("Submitting form:", formData);
+//     try {
+//         const res = await updateUserAPIMethod(valueFromLocalStorage);
+//         if(res.ok) {
+//             const jsonResult = await res.json();
+//             console.log(jsonResult);
+//             navigate("/dashboard");
+//         }
+//     } catch(error) {
+//         console.error("Error updating user:", error);
+//         // Handle the error appropriately here
+//     }
+// };
+
+const handleSubmit = async (event) => {
+  // event.preventDefault(); // Prevents the default form submission behavior
+  console.log("Submitting form:", formData);
+  try {
+      // Use formData instead of user for the update
+      const res = await updateUserAPIMethod(valueFromLocalStorage, formData);
+      if(res.ok) {
+          const jsonResult = await res.json();
+          console.log(jsonResult);
+          navigate("/dashboard"); // Navigate on successful update
+      } else {
+          // Handle non-ok responses here, if needed
+          console.error("Failed to update user");
+      }
+  } catch(error) {
+      console.error("Error updating user:", error);
+      // Handle the error appropriately here
+  }
 };
+
 
   const isFormComplete = Object.values(formData).every(value => value !== '');
 
