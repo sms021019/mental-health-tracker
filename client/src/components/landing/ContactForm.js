@@ -32,9 +32,9 @@ const ContactForm = () => {
       );
   };
   return (
-    <div class="contact-form">
-      <span class="contact_title">Have Any Questions?</span>
-      <div class="contact_subtitle">
+    <div className="contact-form">
+      <span className="contact_title">Have Any Questions?</span>
+      <div className="contact_subtitle">
         Just enter your email and we will get back with you soon!
       </div>
       <form onSubmit={handleSendEmail}>
@@ -43,7 +43,7 @@ const ContactForm = () => {
           id="email"
           value={email}
           name="email"
-          required="true"
+          required={true}
           placeholder="Enter your email, so that we can get back to you!"
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -52,7 +52,7 @@ const ContactForm = () => {
           id="message"
           name="message"
           value={message}
-          required="true"
+          required={true}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Enter your message"
         ></textarea>

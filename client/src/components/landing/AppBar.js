@@ -1,41 +1,52 @@
 import * as React from "react";
+import { useEffect } from "react";
 import "./landing.css";
 import logo from "../../assets/images/logo.png";
 import Button from "../../widgets/Button";
 import { useNavigate } from "react-router-dom";
-import { selectUser } from '../../features/userSlice';
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout } from "../../features/userSlice";
-
+import { useSelector } from "react-redux";
+import { selectUser } from "../../features/userSlice";
 export default function NavBar() {
   const navigate = useNavigate();
-  const user = useSelector(selectUser);
   const dispatch = useDispatch();
+  const valueFromLocalStorage = localStorage.getItem("token");
+  const user = useSelector(selectUser);
+  console.log(user);
+  useEffect(() => {
+    console.log("Token:", valueFromLocalStorage);
+  }, [user]);
 
   const handleLogout = () => {
+    localStorage.removeItem("token");
     dispatch(logout());
     navigate("/");
   };
 
   return (
-    <div className="navbar_container" style={{ backgroundColor: "" }}>
+    <div className="navbar_container">
       <div className="navbar_logo_container">
         <img
           src={logo}
-          onClick={() => navigate("/")}
+          onClick={() => {
+            navigate("/");
+            console.log("Clicked");
+          }}
           className="main_logo"
           alt="logo"
         />
         Mentallyyy
       </div>
-      {console.log("USER: ", user)}
-      {user == {} ? (
-        <Button text="Logout" onClick={handleLogout} />
-      ) : (
+
+      {valueFromLocalStorage === null ? (
         <div className="navbar_links">
           <Button text="Login" to="/login" />
           <Button text="Register" to="/register" />
+        </div>
+      ) : (
+        <div className="btn_container" onClick={handleLogout}>
+          Logout
         </div>
       )}
     </div>
