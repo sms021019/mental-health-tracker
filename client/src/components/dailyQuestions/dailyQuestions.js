@@ -98,8 +98,9 @@ const DailyQuestions = () => {
       answer_prob: [],
       stress_point: 0
     }
-    const arr = ['1', '2'];
-    const uData = { userData: arr };
+
+    const uData = {userData: [newObject]};
+
     try {
       // Use formData instead of user for the update
       const res = await updateUserAPIMethod(valueFromLocalStorage, uData);

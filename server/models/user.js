@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema({
     {
       datetime: Date,
       answer_prob: [Number],
+      answers: [],
       stress_point: Number,
       condition: String,
     },
