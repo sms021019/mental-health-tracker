@@ -68,7 +68,7 @@ const DailyQuestions = () => {
   const [answers, setAnswers] = useState([]);
 
   const totalQuestions = questions.length;
-  const progress = (currentQuestionIndex / (totalQuestions - 1)) * 100;
+  const progress = (currentQuestionIndex / totalQuestions) * 100;
 
   useEffect(() => {
     setQuestions(selectRandomQuestions());
