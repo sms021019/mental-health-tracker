@@ -24,6 +24,15 @@ export const getAllUsersAPIMethod = () => {
 };
 
 
+export const updateUserAPIMethod = (user) => {
+    return fetch(`/api/udpateUser/${user._id}`, {
+        ...defaultHeaders,
+        method: 'PUT', // The method defaults to GET
+        body: JSON.stringify(user),
+    }).then(checkStatus);
+}
+
+
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
         return response;
