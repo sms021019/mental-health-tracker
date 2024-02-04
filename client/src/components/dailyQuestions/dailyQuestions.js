@@ -65,7 +65,7 @@ const selectRandomQuestions = () => {
 const DailyQuestions = () => {
   const [questions, setQuestions] = useState(selectRandomQuestions);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState({});
+  const [answers, setAnswers] = useState([]);
 
   const totalQuestions = questions.length;
   const progress = (currentQuestionIndex / (totalQuestions - 1)) * 100;
@@ -75,20 +75,16 @@ const DailyQuestions = () => {
   }, []);
 
   const handleAnswerChange = (event) => {
-    const questionId = questions[currentQuestionIndex][0];
-    console.log(event.target.value);
     const newAnswers = {
       ...answers,
-      [currentQuestionIndex]: { [questionId]: event.target.value },
+      [currentQuestionIndex]: event.target.value,
     };
     setAnswers(newAnswers);
   };
 
   const handleSubmit = async (event) => {
-    // event.preventDefault(); // This is crucial to prevent form from actually submitting and reloading the page.
     console.log("Submitting answers:", answers);
     try {
-      // Example: Send answers to your server
       const response = await fetch("YOUR_API_ENDPOINT", {
         method: "POST",
         headers: {
