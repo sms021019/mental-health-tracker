@@ -88,6 +88,7 @@ const updateUser = async (req, res) => {
     ethnicity,
     occupation,
     pronoun,
+    userData,
   } = req.body;
 
   console.log("UPDATING USER: ", userId);
@@ -111,6 +112,9 @@ const updateUser = async (req, res) => {
     userToUpdate.ethnicity = ethnicity || userToUpdate.ethnicity;
     userToUpdate.occupation = occupation || userToUpdate.occupation;
     userToUpdate.pronoun = pronoun || userToUpdate.pronoun;
+    userToUpdate.userData = userData || userToUpdate.userData;
+
+    console.log("userData: ", userData);
 
     // Save the updated user to the database
     const updatedUser = await userToUpdate.save();
