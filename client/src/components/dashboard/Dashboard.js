@@ -49,7 +49,7 @@ const DashBoard = () => {
                 }
 
                 // Assuming getUserById returns an object with a 'userData' property
-                const fetchedUser = await getUserById(user.token);
+                const fetchedUser = await getUserById(valueFromLocalStorage);
 
                 setUserData(fetchedUser.userData);
 
