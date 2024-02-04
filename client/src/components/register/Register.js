@@ -31,7 +31,8 @@ const Register = () => {
       if (res.ok) {
         res.json().then((jsonResult) => {
           dispatch(login(jsonResult));
-          localStorage.setItem("token", jsonResult.token);
+          console.log(jsonResult);
+          localStorage.setItem("token", jsonResult._id);
         });
         navigate("/personalinfo");
       }
