@@ -24,11 +24,11 @@ export const getAllUsersAPIMethod = () => {
 };
 
 
-export const updateUserAPIMethod = (user) => {
-    return fetch(`http://localhost:3001/api/udpateUser/${user._id}`, {
+export const updateUserAPIMethod = (userToken) => {
+    return fetch(`http://localhost:3001/api/uddateUser/${userToken}`, {
         ...defaultHeaders,
         method: 'PUT', // The method defaults to GET
-        body: JSON.stringify(user),
+        body: JSON.stringify(userToken),
     }).then(checkStatus);
 }
 

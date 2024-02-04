@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import {updateUserAPIMethod} from "../../api/client"
+import {updateUserAPIMethod, getUserById} from "../../api/client"
 import { selectUser } from '../../features/userSlice';
 import { useSelector } from "react-redux";
 
@@ -9,14 +9,14 @@ import './personalInfo.css';
 function Radio({ options, name, handleChange }) {
   return (
     <div className="mydict">
-        <div>
-            {options.map((option, index) => (
-                <label key={index}>
-                <input type="radio" name={name} value={option} onChange={handleChange} />
-                <span>{option}</span>
-                </label>
-            ))}
-        </div>
+      <div>
+        {options.map((option, index) => (
+          <label key={index}>
+            <input type="radio" name={name} value={option} onChange={handleChange} />
+            <span>{option}</span>
+          </label>
+        ))}
+      </div>
     </div>
   );
 }
@@ -24,22 +24,22 @@ function Radio({ options, name, handleChange }) {
 const Button = ({ text, to, isFormComplete }) => {
   const navigate = useNavigate();
 
-    const handleClick = (e) => {
-      if (!isFormComplete) {
-        e.preventDefault();
-        return; 
-      }
-      navigate(to);
-    };
-  
-    const btnStyle = !isFormComplete ? { pointerEvents: 'none', opacity: 0.5 } : {};
-  
-    return (
-      <div className="btn_container" onClick={handleClick} style={btnStyle}>
-        {text}
-      </div>
-    );
+  const handleClick = (e) => {
+    if (!isFormComplete) {
+      e.preventDefault();
+      return;
+    }
+    navigate(to);
   };
+
+  const btnStyle = !isFormComplete ? { pointerEvents: 'none', opacity: 0.5 } : {};
+
+  return (
+    <div className="btn_container" onClick={handleClick} style={btnStyle}>
+      {text}
+    </div>
+  );
+};
 
 
 function AgeInput({ value, onChange }) {
@@ -72,8 +72,11 @@ function PersonalInfo() {
     averageSleepingHours: ''
   });
 
+  const valueFromLocalStorage = localStorage.getItem('token');
+  console.log("VAL: ", valueFromLocalStorage);
+
   const navigate = useNavigate();
-  const user = useSelector(selectUser);
+  const user = getUserById(valueFromLocalStorage);
   console.log("USER: ", user);
 
   const handleChange = (e) => {
@@ -92,16 +95,20 @@ function PersonalInfo() {
   };
 
   const handleSubmit = async (event) => {
+    // event.preventDefault(); // Prevents the default form submission behavior
     console.log("Submitting form:", formData);
-    updateUserAPIMethod(user).then((res) => {
+    try {
+        const res = await updateUserAPIMethod(valueFromLocalStorage);
         if(res.ok) {
-            res.json().then((jsonResult) => {
-                console.log(jsonResult);
-            })
+            const jsonResult = await res.json();
+            console.log(jsonResult);
             navigate("/dashboard");
         }
-    })
-  };
+    } catch(error) {
+        console.error("Error updating user:", error);
+        // Handle the error appropriately here
+    }
+};
 
   const isFormComplete = Object.values(formData).every(value => value !== '');
 
@@ -146,6 +153,7 @@ function PersonalInfo() {
           <AgeInput value={formData.averageSleepingHours} onChange={(newValue) => handleAgeChange(newValue, 'averageSleepingHours')} />
         </div>
         <div className='submit_container' onClick={() => isFormComplete ? handleSubmit() : void 0}>
+
           <Button text={"Submit"} to={"/dashboard"} isFormComplete={isFormComplete}/>
         </div>
       </form>

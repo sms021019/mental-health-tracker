@@ -124,8 +124,6 @@ const loginUser = async (req, res) => {
         if (!user) {
             return res.status(401).json({ message: 'Invalid email or password' });
         }
-        console.log("pwd: ", password);
-        console.log("user.pwd: ", user.password);
 
         // Compare the provided password with the hashed password in the database
         if (password !== user.pwd) {
