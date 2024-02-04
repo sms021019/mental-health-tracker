@@ -92,14 +92,14 @@ const DailyQuestions = () => {
   const handleSubmit = async (event) => {
     console.log("Submitting answers:", answers);
     const newObject = {
-      datetime: "",
+      datetime: new Date(),
       questions_index: [],
       answers: answers,
       answer_prob: [],
       stress_point: 0
     }
 
-    const uData = {userData: [newObject]};
+    const uData = { userData: [newObject] };
 
     try {
       // Use formData instead of user for the update
