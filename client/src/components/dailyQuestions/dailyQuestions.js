@@ -118,10 +118,12 @@ const DailyQuestions = () => {
 
   return (
     <>
-      <Lottie
-        style={{ width: "20rem", height: "20rem" }}
-        animationData={FacialExpression}
-      />
+      <div className="lottie_container">
+        <Lottie
+          style={{ width: "20rem", height: "20rem" }}
+          animationData={FacialExpression}
+        />
+      </div>
       {/* <Box
         sx={{
           display: "flex",
@@ -148,6 +150,7 @@ const DailyQuestions = () => {
             name="text"
             onChange={handleAnswerChange}
             value={answers[currentQuestionIndex] || ""}
+            style={{ height: "10rem", padding: "2rem" }}
           />
         </form>
 
