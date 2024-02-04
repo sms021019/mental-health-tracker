@@ -3,8 +3,21 @@ import "./landing.css";
 import logo from "../../assets/images/logo.png";
 import Button from "../../widgets/Button";
 import { useNavigate } from "react-router-dom";
+import { selectUser } from '../../features/userSlice';
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logout } from "../../features/userSlice";
+
 export default function NavBar() {
   const navigate = useNavigate();
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
+
   return (
     <div className="navbar_container" style={{ backgroundColor: "" }}>
       <div className="navbar_logo_container">
@@ -16,11 +29,15 @@ export default function NavBar() {
         />
         Mentallyyy
       </div>
-
-      <div className="navbar_links">
-        <Button text="Login" to="/login" />
-        <Button text="Register" to="/register" />
-      </div>
+      {console.log("USER: ", user)}
+      {user == {} ? (
+        <Button text="Logout" onClick={handleLogout} />
+      ) : (
+        <div className="navbar_links">
+          <Button text="Login" to="/login" />
+          <Button text="Register" to="/register" />
+        </div>
+      )}
     </div>
   );
 }
