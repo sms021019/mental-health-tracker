@@ -75,11 +75,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 3rem;
 }
 
 .dashboard_right_left {
   margin-right: 0.5rem;
+  flex-direction: column;
+}
+.dashboard_right_left .rec_title {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .dashboard_right_right {
