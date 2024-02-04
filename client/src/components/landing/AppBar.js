@@ -33,7 +33,7 @@ export default function NavBar() {
           className="main_logo"
           alt="logo"
         />
-        Mentallyyy
+        Mindbloom.ai
       </div>
 
       {valueFromLocalStorage === null ? (
