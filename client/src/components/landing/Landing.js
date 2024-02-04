@@ -39,6 +39,7 @@ class TypedReactDemo extends React.Component {
     );
   }
 }
+<age></age>;
 
 const Landing = () => {
   return (
