@@ -1,7 +1,8 @@
 const User = require('../models/user'); // Import your User model
 
 const createUser = async (req, res) => {
-    const { name, email, password } = req.body;
+    console.log("CREATING USER");
+    const { firstname, lastname, email, pwd, gender, age, marriageStatus, ethnicity, occupation, pronoun } = req.body;
 
     try {
         // Check if the user with the given email already exists
@@ -13,9 +14,16 @@ const createUser = async (req, res) => {
 
         // Create a new user instance
         const newUser = new User({
-            name,
+            firstname,
+            lastname,
             email,
-            password
+            pwd,
+            gender,
+            age,
+            marriageStatus,
+            ethnicity,
+            occupation,
+            pronoun
         });
 
         // Save the user to the database
