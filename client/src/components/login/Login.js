@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../features/userSlice";
+import { loginUserAPIMethod } from "../../api/client";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -15,6 +19,14 @@ const Login = () => {
   };
   const handleLogin = (e) => {
     e.preventDefault();
+    loginUserAPIMethod(loginData).then((res) => {
+      if (res.ok) {
+        res.json().then((jsonResult) => {
+          dispatch(login(jsonResult));
+        })
+        navigate("/dashboard");
+      }
+    });
   };
   return (
     <div className="login_container">

@@ -112,10 +112,41 @@ const getAllUsers = async (req, res) => {
     }
 };
 
+const loginUser = async (req, res) => {
+    console.log("USER LOGIN");
+
+    try {
+        const { email, password } = req.body;
+
+        // Find the user by email
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+        console.log("pwd: ", password);
+        console.log("user.pwd: ", user.password);
+
+        // Compare the provided password with the hashed password in the database
+        if (password !== user.pwd) {
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+
+        // Create a JWT token for authentication
+        // const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
+        const token = user._id;
+
+        res.status(200).json({ token });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
 
 module.exports = {
     createUser: createUser,
     updateUser: updateUser,
     getUser: getUser,
-    getAllUsers: getAllUsers
+    getAllUsers: getAllUsers,
+    loginUser: loginUser,
 };

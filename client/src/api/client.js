@@ -25,12 +25,25 @@ export const getAllUsersAPIMethod = () => {
 
 
 export const updateUserAPIMethod = (user) => {
-    return fetch(`/api/udpateUser/${user._id}`, {
+    return fetch(`http://localhost:3001/api/udpateUser/${user._id}`, {
         ...defaultHeaders,
         method: 'PUT', // The method defaults to GET
         body: JSON.stringify(user),
     }).then(checkStatus);
 }
+
+
+export const loginUserAPIMethod = async (user) => {
+    console.log("CLIENT LOGING");
+    const response = await fetch(`http://localhost:3001/api/login`, {
+        ...defaultHeaders,
+        method: "POST",
+        body: JSON.stringify(user),
+    });
+    console.log("RES: ", response);
+
+    return response;
+};
 
 
 function checkStatus(response) {
