@@ -13,10 +13,7 @@ export default function NavBar() {
   const dispatch = useDispatch();
   const valueFromLocalStorage = localStorage.getItem("token");
   const user = useSelector(selectUser);
-  console.log(user);
-  useEffect(() => {
-    console.log("Token:", valueFromLocalStorage);
-  }, [user]);
+  useEffect(() => {}, [user]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
