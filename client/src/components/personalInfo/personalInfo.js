@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import {updateUserAPIMethod} from "../../api/client"
+import { selectUser } from '../../features/userSlice';
+import { useSelector } from "react-redux";
 
 import './personalInfo.css';
 
@@ -70,6 +72,10 @@ function PersonalInfo() {
     averageSleepingHours: ''
   });
 
+  const navigate = useNavigate();
+  const user = useSelector(selectUser);
+  console.log("USER: ", user);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -87,21 +93,14 @@ function PersonalInfo() {
 
   const handleSubmit = async (event) => {
     console.log("Submitting form:", formData);
-    try {
-      const response = await fetch("YOUR_API_ENDPOINT", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await response.json();
-      console.log("Submission successful", data);
-      // Handle success (e.g., navigate to a different page or show a success message)
-    } catch (error) {
-      console.error("Submission failed", error);
-      // Handle error (e.g., show an error message)
-    }
+    updateUserAPIMethod(user).then((res) => {
+        if(res.ok) {
+            res.json().then((jsonResult) => {
+                console.log(jsonResult);
+            })
+            navigate("/dashboard");
+        }
+    })
   };
 
   const isFormComplete = Object.values(formData).every(value => value !== '');
