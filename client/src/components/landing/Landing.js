@@ -2,7 +2,9 @@ import React from "react";
 import { Typed } from "react-typed";
 import ContactForm from "./ContactForm";
 import Lottie from "lottie-react";
-import Ladder from "../../assets/lottie/Helper.json";
+import Helper from "../../assets/lottie/Helper.json";
+import MoodSwing from "../../assets/lottie/MoodSwing.json";
+import Diagnose from "../../assets/lottie/Diagnose.json";
 class TypedReactDemo extends React.Component {
   componentDidMount() {
     const { strings } = this.props;
@@ -43,21 +45,27 @@ const Landing = () => {
     <>
       <div className="landing_container">
         <div className="landing_left">
-          <Lottie
-            style={{ width: "20rem", height: "20rem" }}
-            animationData={Ladder}
-          />
-        </div>
-        <div className="landing_right">
           <div className="landing_maintext">
             Unlock your mind's potential: Track your mental health and thrive.
           </div>
+          <Lottie
+            style={{ width: "20rem", height: "20rem" }}
+            animationData={Helper}
+          />
           <div className="landing_subtext">
             Curious about your well-being? Take the journey to self-discovery.
           </div>
+          <Lottie
+            style={{ width: "20rem", height: "20rem" }}
+            animationData={MoodSwing}
+          />
           <div className="landing_subtext">
             Beyond mood swings: Gain insights and improve your mental state.
           </div>
+          <Lottie
+            style={{ width: "20rem", height: "20rem" }}
+            animationData={Diagnose}
+          />
           <div className="landing_subtext">
             Empower your mental health: AI-powered guidance just a click away.
             Get personalized recommendations based on your unique thoughts and

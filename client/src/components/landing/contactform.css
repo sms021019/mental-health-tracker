@@ -49,24 +49,12 @@ textarea {
   outline: none;
   box-shadow: 0 0 5px #4e7ec7;
 }
-/* .btn_container {
-  width: min-content;
-  align-self: center;
-  background-color: rgba(75, 86, 96, 0.585);
-  border-radius: 0.3rem;
-  cursor: pointer;
-  padding: 1rem 2rem 1rem 2rem;
-}
 
-.btn_container:hover {
-  background-color: rgba(75, 86, 96, 0.873);
-} */
-/* button */
-.button {
+.contact_button {
   width: 120px;
   height: 30px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-start;
   gap: 12px;
   cursor: pointer;
@@ -91,7 +79,7 @@ textarea {
   color: white;
 }
 
-.button:hover .arrow {
+.contact_button:hover .arrow {
   animation: slide-in-left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
@@ -107,6 +95,6 @@ textarea {
   }
 }
 
-.button:active {
+.contact_button:active {
   transform: scale(0.97);
 }

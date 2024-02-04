@@ -56,7 +56,7 @@ const ContactForm = () => {
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Enter your message"
         ></textarea>
-        <button className="button">
+        <button className="contact_button">
           <span className="text">Send</span>
           <i className="arrow bi bi-send"></i>
         </button>
