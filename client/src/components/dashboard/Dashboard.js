@@ -4,14 +4,18 @@ import BarChart from './BarChart';
 import GoogleBarChart from './BarChart';
 import CircleChart from './CircleChart';
 import { getAllUsersAPIMethod, getUserById } from '../../api/client';
+import { selectUser } from '../../features/userSlice';
+import { useSelector } from "react-redux";
 
 const DashBoard = () => {
     const [recommendation, setRecommendation] = useState("Try taking a walk and talking to your friends! It is scientifically proven that walks enhance mood by 10%!");
-    const [user, setUser] = useState(null);
+    // const [user, setUser] = useState(null);
     const [userData, setUserData] = useState(null);
     const [completedToday, setCompletedToday] = useState(false);
     const today = new Date();
     const formattedDate = today.toISOString().split('T')[0];
+    const user = useSelector(selectUser);
+    console.log("USER: ", user);
 
     useEffect(() => {
         const fetchUser = async () => {
