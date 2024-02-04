@@ -3,41 +3,27 @@
 import React, { useEffect, useState } from 'react';
 import { Chart } from 'react-google-charts';
 
-const BarChart = () => {
+const BarChart = ({ userData }) => {
     // Data for the chart
     const emotion = "depressed";
-    const [data, setData] = useState([
-        ['Percentage', "Mental State Intensity"],
-        ['01132024', 20],
-        ['01132024', 33],
-        ['01132024', 60],
-        ['01132024', 90],
-        ['01132024', 10],
-    ]);
-    // const data = [
-    //     ['Percentage', emotion],
-    //     ['New York City, NY', 20],
-    //     ['Los Angeles, CA', 33],
-    //     ['Chicago, IL', 60],
-    //     ['Houston, TX', 90],
-    //     ['Philadelphia, PA', 10],
-    // ];
-    // useEffect(() => {
-    //     // Replace this logic with your actual data fetching or generation logic
-    //     // For now, I'm just updating the data with some sample values after 2 seconds
-    //     const timeout = setTimeout(() => {
-    //         setData([
-    //             ['Percentage', "Mental State Intensity"],
-    //             ['01132024', 20],
-    //             ['01132024', 33],
-    //             ['01132024', 60],
-    //             ['01132024', 90],
-    //             ['01132024', 10],
-    //         ]);
-    //     }, 1000);
+    if (userData) {
+        console.log("USERDATA BARCHART: ", userData);
+    }
 
-    //     return () => clearTimeout(timeout);
-    // }, []);
+    // const dateArray = userData.map(obj => obj.datetime);
+    // const stress_point_array = userData.map(obj => Math.round(obj.stress_point * 100));
+
+    // const finalArray = [['Percentage', 'Mental State Intensity']];
+    // const combinedArray = dateArray.map((date, index) => [date, stress_point_array[index]]);
+    // finalArray.push(combinedArray);
+    // console.log("FINAL ARRAY: ", finalArray);
+
+    const finalArray = [
+        ['Percentage', 'Emotion'],
+        ...userData.map(obj => [obj.datetime.split('T')[0] + " \n(Depressed)", obj.stress_point * 100]),
+    ];
+
+    const [data, setData] = useState(finalArray);
 
     // Options for the chart
     const options = {
@@ -52,8 +38,10 @@ const BarChart = () => {
         vAxis: {
             title: 'Percentage',
             titleTextStyle: { color: 'white' }, // Change the color to your preferred color
-            textStyle: { color: 'white' }
-
+            textStyle: { color: 'white' },
+            viewWindow: {
+                max: 100 // Set your desired maximum value here
+            }
         },
         backgroundColor: '#41434a',
         titleTextStyle: { color: 'white' }, // Change the color to your preferred color

@@ -56,6 +56,10 @@
     background-color: #41434a;
 }
 
+.dashboard_noData {
+    height: 100%;
+}
+
 .barchart,
 .circlechart {
     /* Adjust values as needed */

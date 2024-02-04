@@ -3,20 +3,19 @@
 import React, { useEffect, useState } from 'react';
 import { Chart } from 'react-google-charts';
 
-const CircleChart = () => {
+const CircleChart = ({ userData }) => {
     const completedPercentage = 75;
-    // const [data, setData] = useState([
-    //     ['Progress', completedPercentage],
-    //     ['Remaining', 100 - completedPercentage],
-    // ]);
-    // const data = [
-    //     ['Progress', completedPercentage],
-    //     ['Remaining', 100 - completedPercentage]
-    // ];
+    var maxObject = 0;
+    var maxPercentage = 0;
+    if (userData) {
+        maxObject = userData.reduce((max, obj) => (obj.stress_point > max.stress_point ? obj : max), userData[0]);
+        maxPercentage = Math.round(maxObject.stress_point * 100);
+    }
+
     const data = [
         ["Task", "Hours per Day"],
-        ['Intensity', completedPercentage],
-        ['Other', 100 - completedPercentage]
+        ['Intensity', maxPercentage],
+        ['Other', 100 - maxPercentage]
     ];
 
     // useEffect(() => {
@@ -30,25 +29,26 @@ const CircleChart = () => {
     // Options for the chart
     const options = {
         title: 'Circular Progress Chart',
-        pieHole: 0.6, // Set the size of the hole in the middle to create a circle
-        pieSliceText: 'none', // Hide labels on the chart
+        pieHole: 0.6,
+        pieSliceText: 'none',
         slices: {
-            0: { color: '#487575' }, // Color for the completed portion
-            1: { color: 'gray' }, // Color for the remaining portion
+            0: { color: '#487575' },
+            1: { color: 'gray' },
         },
         animation: {
-            startup: true,  // Enable animation on load
-            duration: 1000, // Animation duration in milliseconds
-            easing: 'out',  // Easing function for animation
+            startup: true,
+            duration: 1000,
+            easing: 'out',
         },
         backgroundColor: '#41434a',
         chartArea: { width: 300, height: 300 },
         legend: {
-            textStyle: { color: 'white' }, // Change the color to your preferred color
+            textStyle: { color: 'white' },
         },
     };
 
     return (
+        // TODO: display the emotion (text)
         <Chart
             width={'100%'}
             height={'100%'}
