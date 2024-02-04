@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, LinearProgress, Typography } from "@mui/material";
-import { updateUserAPIMethod } from "../../api/client"
+import { updateUserAPIMethod } from "../../api/client";
 import { useNavigate } from "react-router-dom";
 
 import "../../App.css";
@@ -71,7 +71,7 @@ const DailyQuestions = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
 
-  const valueFromLocalStorage = localStorage.getItem('token');
+  const valueFromLocalStorage = localStorage.getItem("token");
   const navigate = useNavigate();
 
   const totalQuestions = questions.length;
@@ -82,11 +82,15 @@ const DailyQuestions = () => {
   }, []);
 
   const handleAnswerChange = (event) => {
-    const newAnswers = {
-      ...answers,
-      [currentQuestionIndex]: event.target.value,
-    };
-    setAnswers(newAnswers);
+    // const newAnswers = {
+    //   ...answers,
+    //   [currentQuestionIndex]: event.target.value,
+    // };
+    setAnswers((prevAnswers) => {
+      const updatedAnswers = [...prevAnswers];
+      updatedAnswers[currentQuestionIndex] = event.target.value;
+      return updatedAnswers;
+    });
   };
 
   const handleSubmit = async (event) => {
@@ -96,8 +100,8 @@ const DailyQuestions = () => {
       questions_index: [],
       answers: answers,
       answer_prob: [],
-      stress_point: 0
-    }
+      stress_point: 0,
+    };
 
     const uData = { userData: [newObject] };
 
@@ -117,7 +121,6 @@ const DailyQuestions = () => {
       // Handle the error appropriately here
     }
   };
-
 
   const handleNext = () => {
     setCurrentQuestionIndex((prevIndex) =>
