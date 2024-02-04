@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import {updateUserAPIMethod, getUserById} from "../../api/client"
+import { selectUser } from '../../features/userSlice';
+import { useSelector } from "react-redux";
 
 import './personalInfo.css';
 
 function Radio({ options, name, handleChange }) {
-  const valueFromLocalStorage = localStorage.getItem('token');
-  console.log("VAL: ", valueFromLocalStorage);
   return (
     <div className="mydict">
       <div>
@@ -71,6 +72,13 @@ function PersonalInfo() {
     averageSleepingHours: ''
   });
 
+  const valueFromLocalStorage = localStorage.getItem('token');
+  console.log("VAL: ", valueFromLocalStorage);
+
+  const navigate = useNavigate();
+  const user = getUserById(valueFromLocalStorage);
+  console.log("USER: ", user);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -86,11 +94,21 @@ function PersonalInfo() {
     }));
   };
 
-  const handleSubmit = (e) => {
-    // e.preventDefault();
-    console.log(formData);
-    // Here you would typically send the formData to your server via an API call
-  };
+  const handleSubmit = async (event) => {
+    // event.preventDefault(); // Prevents the default form submission behavior
+    console.log("Submitting form:", formData);
+    try {
+        const res = await updateUserAPIMethod(valueFromLocalStorage);
+        if(res.ok) {
+            const jsonResult = await res.json();
+            console.log(jsonResult);
+            navigate("/dashboard");
+        }
+    } catch(error) {
+        console.error("Error updating user:", error);
+        // Handle the error appropriately here
+    }
+};
 
   const isFormComplete = Object.values(formData).every(value => value !== '');
 
@@ -135,7 +153,8 @@ function PersonalInfo() {
           <AgeInput value={formData.averageSleepingHours} onChange={(newValue) => handleAgeChange(newValue, 'averageSleepingHours')} />
         </div>
         <div className='submit_container' onClick={() => isFormComplete ? handleSubmit() : void 0}>
-          <Button text={"Submit"} to={"/"} isFormComplete={isFormComplete} />
+
+          <Button text={"Submit"} to={"/dashboard"} isFormComplete={isFormComplete}/>
         </div>
       </form>
     </div>
