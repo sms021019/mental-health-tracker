@@ -1,9 +1,9 @@
-.login_container {
+.register_container {
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
-.login_form {
+.register_form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,17 +13,17 @@
   padding-bottom: 0.4em;
 }
 
-.login_title {
+.register_title {
   text-align: center;
   font-size: 2.5rem;
   font-weight: 300;
   margin: 2rem 0 1rem 0;
 }
-.login_subtitle {
+.register_subtitle {
   text-align: center;
   font-size: 1.1rem;
   font-weight: 200;
-  margin: 1rem 0 3rem 0;
+  margin: 1rem 0 1rem 0;
 }
 
 .field {
@@ -46,6 +46,7 @@
   height: 1.3em;
   width: 1.3em;
   fill: white;
+  color: white;
 }
 
 .input-field {
@@ -66,7 +67,7 @@
   margin-top: 2rem;
 }
 
-.login_btn {
+.register_btn {
   padding: 0.5em;
   padding-left: 1.1em;
   padding-right: 1.1em;
@@ -79,12 +80,12 @@
   color: white;
 }
 
-.login_btn:hover {
+.register_btn:hover {
   background-color: black;
   color: white;
 }
 
-.login_register_link {
+.register_login_link {
   text-align: right;
   margin-top: 1rem;
   font-size: 0.9rem;
@@ -93,6 +94,6 @@
   cursor: pointer;
   align-self: flex-end;
 }
-.login_register_link:hover {
+.register_login_link:hover {
   color: #d3d3d3;
 }
