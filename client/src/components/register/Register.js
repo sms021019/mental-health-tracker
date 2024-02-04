@@ -10,10 +10,10 @@ const Register = () => {
   const dispatch = useDispatch();
 
   const [registerData, setRegisterData] = useState({
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     email: "",
-    password: "",
+    pwd: "",
   });
   const [confirmPwd, setConfirmPwd] = useState("");
   const handleInputChange = (e) => {
@@ -21,7 +21,7 @@ const Register = () => {
     setRegisterData((prevData) => ({ ...prevData, [name]: value }));
   };
   const handleRegister = (e) => {
-    if (registerData.password !== confirmPwd) {
+    if (registerData.pwd !== confirmPwd) {
       alert("Passwords do not match");
       return;
     }
@@ -54,7 +54,7 @@ const Register = () => {
             className="input-field"
             type="text"
             onChange={handleInputChange}
-            name="firstName"
+            name="firstname"
           />
         </div>
         <div className="field">
@@ -65,7 +65,7 @@ const Register = () => {
             className="input-field"
             type="text"
             onChange={handleInputChange}
-            name="lastName"
+            name="lastname"
           />
         </div>
         <div className="field">
@@ -104,7 +104,7 @@ const Register = () => {
             className="input-field"
             type="password"
             onChange={handleInputChange}
-            name="password"
+            name="pwd"
           />
         </div>
         <div className="field">
