@@ -15,25 +15,58 @@ const DashBoard = () => {
     const today = new Date();
     const formattedDate = today.toISOString().split('T')[0];
     const user = useSelector(selectUser);
-    console.log("USER: ", user);
+    console.log("USER: ", user.token);
+    const valueFromLocalStorage = localStorage.getItem('token');
+    console.log("VAL: ", valueFromLocalStorage);
 
+
+    // useEffect(() => {
+    //     const fetchUser = async () => {
+    //         // const fetchedUser = await getUserById("65bee3d46072d6d72f0e7bb1");
+    //         var fetchedUser = null;
+    //         if (user) {
+    //             fetchedUser = await getUserById(user.token);
+    //         }
+
+    //         setUserData(fetchedUser.userData);
+    //         const isTodayInArray = fetchedUser.userData.some(obj => {
+    //             const formattedObjectDate = new Date(obj.datetime).toISOString().split('T')[0];
+    //             // console.log("formattedObjectDate: ", formattedObjectDate);
+    //             // console.log("formattedDate: ", formattedDate);
+    //             return formattedObjectDate === formattedDate;
+
+    //         });
+    //         setCompletedToday(isTodayInArray);
+    //     }
+    //     fetchUser();
+    // }, []);
     useEffect(() => {
         const fetchUser = async () => {
-            // const fetchedUser = await getUserById("65bee3d46072d6d72f0e7bb1");
-            const fetchedUser = await getUserById("65becb586072d6d72f0e7bb0");
+            try {
+                // Ensure user and formattedDate are declared as dependencies
+                if (!user || !formattedDate) {
+                    return;
+                }
 
-            setUserData(fetchedUser.userData);
-            const isTodayInArray = fetchedUser.userData.some(obj => {
-                const formattedObjectDate = new Date(obj.datetime).toISOString().split('T')[0];
-                // console.log("formattedObjectDate: ", formattedObjectDate);
-                // console.log("formattedDate: ", formattedDate);
-                return formattedObjectDate === formattedDate;
+                // Assuming getUserById returns an object with a 'userData' property
+                const fetchedUser = await getUserById(user.token);
 
-            });
-            setCompletedToday(isTodayInArray);
-        }
+                setUserData(fetchedUser.userData);
+
+                const isTodayInArray = fetchedUser.userData.some(obj => {
+                    const formattedObjectDate = new Date(obj.datetime).toISOString().split('T')[0];
+                    return formattedObjectDate === formattedDate;
+                });
+
+                setCompletedToday(isTodayInArray);
+            } catch (error) {
+                console.error('Error fetching user:', error);
+                // Handle the error (e.g., show an error message to the user)
+            }
+        };
+
         fetchUser();
-    }, []);
+    }, [user, formattedDate]);
 
     useEffect(() => {
         if (userData) {

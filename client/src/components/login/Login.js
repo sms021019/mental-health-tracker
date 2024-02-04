@@ -23,10 +23,12 @@ const Login = () => {
       if (res.ok) {
         res.json().then((jsonResult) => {
           dispatch(login(jsonResult));
+          localStorage.setItem('token', jsonResult.token);
         })
         navigate("/dashboard");
       }
     });
+
   };
   return (
     <div className="login_container">

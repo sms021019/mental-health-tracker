@@ -4,16 +4,18 @@ import { useNavigate } from "react-router-dom";
 import './personalInfo.css';
 
 function Radio({ options, name, handleChange }) {
+  const valueFromLocalStorage = localStorage.getItem('token');
+  console.log("VAL: ", valueFromLocalStorage);
   return (
     <div className="mydict">
-        <div>
-            {options.map((option, index) => (
-                <label key={index}>
-                <input type="radio" name={name} value={option} onChange={handleChange} />
-                <span>{option}</span>
-                </label>
-            ))}
-        </div>
+      <div>
+        {options.map((option, index) => (
+          <label key={index}>
+            <input type="radio" name={name} value={option} onChange={handleChange} />
+            <span>{option}</span>
+          </label>
+        ))}
+      </div>
     </div>
   );
 }
@@ -21,22 +23,22 @@ function Radio({ options, name, handleChange }) {
 const Button = ({ text, to, isFormComplete }) => {
   const navigate = useNavigate();
 
-    const handleClick = (e) => {
-      if (!isFormComplete) {
-        e.preventDefault();
-        return; 
-      }
-      navigate(to);
-    };
-  
-    const btnStyle = !isFormComplete ? { pointerEvents: 'none', opacity: 0.5 } : {};
-  
-    return (
-      <div className="btn_container" onClick={handleClick} style={btnStyle}>
-        {text}
-      </div>
-    );
+  const handleClick = (e) => {
+    if (!isFormComplete) {
+      e.preventDefault();
+      return;
+    }
+    navigate(to);
   };
+
+  const btnStyle = !isFormComplete ? { pointerEvents: 'none', opacity: 0.5 } : {};
+
+  return (
+    <div className="btn_container" onClick={handleClick} style={btnStyle}>
+      {text}
+    </div>
+  );
+};
 
 
 function AgeInput({ value, onChange }) {
@@ -133,7 +135,7 @@ function PersonalInfo() {
           <AgeInput value={formData.averageSleepingHours} onChange={(newValue) => handleAgeChange(newValue, 'averageSleepingHours')} />
         </div>
         <div className='submit_container' onClick={() => isFormComplete ? handleSubmit() : void 0}>
-          <Button text={"Submit"} to={"/"} isFormComplete={isFormComplete}/>
+          <Button text={"Submit"} to={"/"} isFormComplete={isFormComplete} />
         </div>
       </form>
     </div>
