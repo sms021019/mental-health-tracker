@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import "./register.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { createUserAPIMethod } from "../../api/client";
+import { login } from "../../features/userSlice";
 const Register = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [registerData, setRegisterData] = useState({
     firstName: "",
     lastName: "",
@@ -23,6 +27,15 @@ const Register = () => {
     }
     console.log(registerData, confirmPwd);
     e.preventDefault();
+    createUserAPIMethod(registerData).then((res) => {
+      if (res.ok) {
+        res.json().then((jsonResult) => {
+          dispatch(login(jsonResult));
+          localStorage.setItem("token", jsonResult.token);
+        });
+        navigate("/personalinfo");
+      }
+    });
   };
   return (
     <div className="register_container">

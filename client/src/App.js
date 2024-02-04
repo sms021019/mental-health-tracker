@@ -12,7 +12,6 @@ import PersonalInfo from "./components/personalInfo/personalInfo";
 
 import DashBoard from "./components/dashboard/Dashboard";
 
-
 function App() {
   return (
     <div className="App">
@@ -23,7 +22,7 @@ function App() {
           <Route path="/dailyquestions" element={<DailyQuestions />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/personalInfo" element={<PersonalInfo />} />
+          <Route path="/personalinfo" element={<PersonalInfo />} />
           <Route path="/dashboard" element={<DashBoard />} />
         </Routes>
       </Router>

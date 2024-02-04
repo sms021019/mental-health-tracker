@@ -7,7 +7,7 @@ const BarChart = ({ userData }) => {
   // Data for the chart
   const emotion = "depressed";
   if (userData) {
-    console.log("USERDATA BARCHART: ", userData);
+    // console.log("USERDATA BARCHART: ", userData);
   }
 
   // const dateArray = userData.map(obj => obj.datetime);
