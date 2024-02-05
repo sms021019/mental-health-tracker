@@ -97,7 +97,7 @@ const DailyQuestions = () => {
     console.log("Submitting answers:", answers);
     const newObject = {
       datetime: new Date(),
-      questions_index: [],
+      questions_index: "hi",
       answers: answers,
       answer_prob: [],
       stress_point: 0,

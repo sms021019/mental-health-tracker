@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema({
       answers: [],
       stress_point: Number,
       condition: String,
+      questions_index: String
     },
   ],
 });
